@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 bg-warning">
+        <h2 class="display-4 text-center">Podrobné informace</h2>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-lg-6 mb-3">
+        <h2 class="display-4 mb-3">{{ workout.name }}</h2>
+        <div class="bg-secondary text-light p-2 mb-3">{{ workout.workouttype }}
+        </div>
+        <div class="bg-secondary text-light p-2 mb-3">{{ workout.date }}
+        </div>
+        <div class="bg-secondary text-light p-2 mb-3">{{ workout.time }}
+        </div>
+        <div class="bg-secondary text-light p-2 mb-3">{{ workout.description }}
+        </div>
+        <div class="bg-secondary text-light p-2 mb-3">{{ workout.effort }}
+        </div>
+        <div class="bg-secondary text-light p-2 mb-3">{{ workout.feeling }}
+        </div>
+        <div class="bg-secondary text-light p-2 mb-3">{{ workout.notes }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

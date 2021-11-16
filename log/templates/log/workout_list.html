@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>workout list</h1>
+<div class="row">
+    {% for workout in workouts_list %}
+    <div class="col-sm-4">
+        {{ workout.name }}
+    <a href="{% url 'workout-detail' workout.pk %} " class="btn btn-primary">Podrobnosti</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

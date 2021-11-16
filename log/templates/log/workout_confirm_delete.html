@@ -1,0 +1,19 @@
+{% extends "base.html"%}
+
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col-sm-12 bg-warning">
+        <h2 class="display-4 text-center">Potvrzení smazání cviceni</h2>
+    </div>
+</div>
+
+<div class="row mt-5 mb-3">
+    <p>Opravdu chcete smazat cviceni <b> {{ workout }}</b>?</p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Ano,smazat">
+    </form>
+</div>
+
+{% endblock %}
