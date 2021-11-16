@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'djangocms_bootstrap4.contrib.bootstrap4_tabs',
     'djangocms_bootstrap4.contrib.bootstrap4_utilities',
     'log',
+    'accounts',
     'widget_tweaks',
 ]
 
@@ -214,3 +215,5 @@ MEDIA_ROOT = os.path.join('/data/media/')
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

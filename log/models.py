@@ -31,7 +31,7 @@ class Workout(models.Model):
     feeling = models.CharField(max_length=20,choices=FEELING,blank=True)
     effort = models.CharField(max_length=20, choices=EFFORT,blank=True)
     notes = models.CharField(max_length=1000,blank=True, verbose_name="post workout notes")
-
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         ordering = ["date"]

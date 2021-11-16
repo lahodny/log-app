@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import render
 from log.models import Workout, WorkoutType
-
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     """Metoda připravuje pohled pro domovskou stránku - šablona index.html"""
@@ -20,44 +20,39 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-class WorkoutListView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
+class WorkoutListView(LoginRequiredMixin, generic.ListView):
     model = Workout
     context_object_name = 'workouts_list'
-    permission_required = 'log.see_list'
 
     def get_queryset(self):
-            return Workout.objects.all()
+        return Workout.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
 
-class WorkoutDetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.DetailView):
+class WorkoutDetailView(LoginRequiredMixin, generic.DetailView):
     model = Workout
-    permission_required = 'log.see_detail'
 
 
-class WorkoutCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
+class WorkoutCreateView(LoginRequiredMixin, generic.CreateView):
     model = Workout
-    fields = ['date','time','workouttype','name','description','feeling','effort','notes']
+    fields = ['date','time','workouttype','name','description','feeling','effort','notes','user']
     success_url = reverse_lazy('workouts')
     #login_url = '/accounts/login/'
-    permission_required = 'log.add_workout'
 
 
-class WorkoutUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
+class WorkoutUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Workout
     #form_class = WorkoutModelForm
-    fields = ['date','time','workouttype','name','description','feeling','effort','notes']
+    fields = ['date','time','workouttype','name','description','feeling','effort','notes','user']
     template_name = 'log/workout_update_form.html'
     success_url = reverse_lazy('workouts')
     login_url = '/accounts/login/'
-    permission_required = 'log.change_workout'
 
 
-class WorkoutDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.DeleteView):
+class WorkoutDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Workout
     success_url = reverse_lazy('workouts')
     login_url = '/accounts/login/'
-    permission_required = 'log.delete_workout'
