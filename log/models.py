@@ -27,10 +27,10 @@ class Workout(models.Model):
     time = models.TimeField(null=True,blank=True)
     workouttype = models.ForeignKey('WorkoutType',on_delete=models.CASCADE)
     name = models.CharField(max_length=1000, blank=True)
-    description = models.CharField(max_length=1000, blank=True)
+    description = models.TextField(blank=True)
     feeling = models.CharField(max_length=20,choices=FEELING,blank=True)
     effort = models.CharField(max_length=20, choices=EFFORT,blank=True)
-    notes = models.CharField(max_length=1000,blank=True, verbose_name="post workout notes")
+    notes = models.TextField(blank=True, verbose_name="post workout notes")
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
