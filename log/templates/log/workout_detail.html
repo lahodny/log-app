@@ -25,5 +25,10 @@
         </div>
     </div>
 </div>
-
+<div class="row mb-3">
+    <div class="col-sm-12 text-center">
+        <a href="{% url 'workout-update' workout.pk %}" class="btn btn-primary">Upravit</a>
+        <a href="{% url 'workout-delete' workout.pk %}" class="btn btn-danger">Smazat</a>
+    </div>
+</div>
 {% endblock %}
