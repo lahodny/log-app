@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Workout(models.Model):
@@ -36,8 +37,16 @@ class Workout(models.Model):
     class Meta:
         ordering = ["date"]
     def __str__(self):
-
         return self.name
+
+    def get_absolute_url(self):
+        url = reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=[self.id])
+        return u'<a href="%s">%s</a>' % (url, str(self.date))
+
+    @property
+    def get_html_url(self):
+        url = reverse('log:workout_edit', args=(self.id,))
+        return f'<a href="{url}"> {self.name} </a>'
 
 class WorkoutType(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="Name of the workout type",
@@ -46,5 +55,4 @@ class WorkoutType(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-
         return self.name

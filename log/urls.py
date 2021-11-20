@@ -1,7 +1,7 @@
 from django.urls import path
-
 from . import views
 
+app_name = 'log'
 urlpatterns = [
     path('', views.index, name='index'),
     path('workouts/', views.WorkoutListView.as_view(), name='workouts'),
@@ -9,4 +9,7 @@ urlpatterns = [
     path('workout/<int:pk>/update/', views.WorkoutUpdateView.as_view(), name='workout-update'),
     path('workout/<int:pk>/delete/', views.WorkoutDeleteView.as_view(), name='workout-delete'),
     path('workout/create/', views.create, name='workout-create'),
+    path('calendar/', views.CalendarView.as_view(), name='calendar'),
+    path('workout/new/', views.workout, name='workout_new'),
+    path('workout/<workout_id>/edit/', views.workout, name='workout_edit'),
 ]
