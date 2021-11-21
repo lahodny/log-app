@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.forms import ModelForm
 
 
 class Workout(models.Model):
@@ -47,6 +48,10 @@ class Workout(models.Model):
     def get_html_url(self):
         url = reverse('log:workout_edit', args=(self.id,))
         return f'<a href="{url}"> {self.name} </a>'
+
+    def get_date(self,year, month, day):
+        return f'<a href="../workout/new/{year}-{month}-{day}" class="add"> + </a>'
+
 
 class WorkoutType(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="Name of the workout type",

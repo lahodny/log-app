@@ -80,3 +80,11 @@ ul {
 a {
   color: #17a2b8;
 }
+
+.today{
+  background-color: lightgrey;!important;
+}
+
+.add{
+  font-size: 20px;
+}

@@ -12,4 +12,5 @@ urlpatterns = [
     path('calendar/', views.CalendarView.as_view(), name='calendar'),
     path('workout/new/', views.workout, name='workout_new'),
     path('workout/<workout_id>/edit/', views.workout, name='workout_edit'),
+    path('workout/new/<workout_date>/', views.workoutdate, name='workout_date'),
 ]

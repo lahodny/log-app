@@ -82,19 +82,18 @@ class CalendarView(LoginRequiredMixin, generic.ListView):
     model = Workout
     template_name = 'log/calendar.html'
 
-    def get_context_data(self, just=None, **kwargs):
+    def get_context_data(self, current=None, **kwargs):
         context = super().get_context_data(**kwargs)
 
         d = get_date(self.request.GET.get('month', None))
-        just = self.request.user
-        cal = Calendar(d.year, d.month, just)
+        current = self.request.user
+        cal = Calendar(d.year, d.month, current)
         html_cal = cal.formatmonth(withyear=True)
 
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
         return context
-
 
 def get_date(req_month):
     if req_month:
@@ -115,10 +114,12 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+
+
 def workout(request, workout_id=None):
     instance = Workout()
     if workout_id:
-        instance = get_object_or_404(Workout, pk=workout_id)
+        instance = get_object_or_404(Workout, pk=workout_id)#neco jako filter
     else:
         instance = Workout()
     form = WorkoutForm(request.POST or None, instance=instance)
@@ -134,3 +135,17 @@ def workout(request, workout_id=None):
     return render(request, 'log/workout_form.html', {'form': form})
 
 
+
+def workoutdate(request, workout_date=None):
+    form = WorkoutForm(request.POST or None, initial={'date': workout_date})
+    if request.method == 'POST':
+        if form.is_valid():
+            Workout.date = workout_date
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
+            return HttpResponseRedirect('/log/calendar/')
+        else:
+            form = WorkoutForm
+
+    return render(request, 'log/workout_form.html', {'form': form})
