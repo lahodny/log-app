@@ -52,6 +52,11 @@ class Workout(models.Model):
     def get_date(self,year, month, day):
         return f'<a href="../workout/new/{year}-{month}-{day}" class="add"> + </a>'
 
+    @property
+    def mydelete(self):
+        url = reverse('log:workout-delete', args=(self.id,))
+        return f'<a href="{url}"> X </a>'
+
 
 class WorkoutType(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="Name of the workout type",

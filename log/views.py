@@ -17,7 +17,7 @@ from .forms import Calendar
 import calendar
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-
+from django.core.exceptions import PermissionDenied
 
 
 def index(request):
@@ -74,8 +74,15 @@ class WorkoutUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class WorkoutDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Workout
-    success_url = reverse_lazy('workouts')
+    success_url = reverse_lazy('log:calendar')
     login_url = '/accounts/login/'
+    def get_queryset(self):
+        return Workout.objects.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
 
 
 class CalendarView(LoginRequiredMixin, generic.ListView):
@@ -115,8 +122,9 @@ def next_month(d):
     return month
 
 
-
 def workout(request, workout_id=None):
+    if request.user != get_object_or_404(Workout, pk=workout_id).user:
+        raise PermissionDenied()
     instance = Workout()
     if workout_id:
         instance = get_object_or_404(Workout, pk=workout_id)#neco jako filter
@@ -133,7 +141,6 @@ def workout(request, workout_id=None):
             form = WorkoutForm
 
     return render(request, 'log/workout_form.html', {'form': form})
-
 
 
 def workoutdate(request, workout_date=None):

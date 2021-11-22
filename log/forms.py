@@ -30,7 +30,7 @@ class Calendar(HTMLCalendar):
 		events_per_day = events.filter(date__day=day)
 		d = ''
 		for event in events_per_day:
-			d += f'<li> {event.get_html_url}</li>'
+			d += f'<li> {event.get_html_url} {event.mydelete} </li>'
 
 		if day != 0:
 			if date.today() == date(self.year, self.month, day):
