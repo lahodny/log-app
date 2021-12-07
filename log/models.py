@@ -55,7 +55,7 @@ class Workout(models.Model):
     @property
     def mydelete(self):
         url = reverse('log:workout-delete', args=(self.id,))
-        return f'<a href="{url}"> X </a>'
+        return f'<a href="{url}" > X </a>'
 
 
 class WorkoutType(models.Model):
