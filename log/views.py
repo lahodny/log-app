@@ -156,3 +156,12 @@ def workoutdate(request, workout_date=None):
             form = WorkoutForm
 
     return render(request, 'log/workout_form.html', {'form': form})
+
+def workoutsearch(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        workouts = Workout.objects.filter(name__contains=searched)
+
+        return render(request, 'log/search.html',{"searched":searched,"workouts":workouts})
+    else:
+        return render(request, 'log/search.html', {})

@@ -5,6 +5,12 @@ Calendar
 
 {% block content %}
 
+<form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'log:workout-search' %}">
+      {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
 <div class="clearfix">
 	<a class="btn btn-info left" href="{% url 'log:calendar' %}?{{ prev_month }}"> Previous Month </a>
 	<a class="btn btn-info right" href="{% url 'log:calendar' %}?{{ next_month }}"> Next Month </a>

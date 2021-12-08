@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2e6bcdc-5532-4c5f-9f60-c150dd28c950" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/templates/log/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quickstart/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/quickstart/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/log/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/templates/log/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/log/templates/log/calendar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/log/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/log/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quickstart/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/quickstart/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -71,7 +74,7 @@
       <workItem from="1637772227537" duration="1489000" />
       <workItem from="1638802852241" duration="1253000" />
       <workItem from="1638880462820" duration="9853000" />
-      <workItem from="1638974122310" duration="1618000" />
+      <workItem from="1638974122310" duration="7313000" />
     </task>
     <servers />
   </component>
