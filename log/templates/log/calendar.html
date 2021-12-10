@@ -16,5 +16,15 @@ Calendar
 	<a class="btn btn-info right" href="{% url 'log:calendar' %}?{{ next_month }}"> Next Month </a>
 </div>
 
+<button type="button" class="btn btn-primary filter">Swimming</button>
+
 {{ calendar }}
+
+<script>
+
+$(document).ready(function(){
+  $(".calendar li a").filter(".Walk").parent().append(" <img src=\"{{ MEDIA_URL }}icons/walk.jpg\" class=\"img-responsive\" style=\"width: 100px;\" />\n");
+});
+
+</script>
 {% endblock %}

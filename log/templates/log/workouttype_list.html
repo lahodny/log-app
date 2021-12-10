@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>workout list</h1>
+<div class="row">
+    {% for workout in workouts_list %}
+    <div class="col-sm-4">
+        <img src="{{ MEDIA_URL }}{{ workout.icon }}" class="img-responsive" style="width: 100px; float: left; margin-right: 10px;" />
+        {{ workout.icon }}
+    <a href="{% url 'log:workout-detail' workout.pk %} " class="btn btn-primary">Podrobnosti</a>
+    </div>
+    {% endfor %}
+</div>
+    <div class="row mb-3">
+    <div class="col-sm-12 text-center">
+        <a href="{% url 'log:workout-create' %}" class="btn btn-success">Nové cvičení</a>
+    </div>
+</div>
+{% endblock %}

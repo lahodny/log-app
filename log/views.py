@@ -48,11 +48,11 @@ def create(request):
 
 
 class WorkoutListView(LoginRequiredMixin, generic.ListView):
-    model = Workout
+    model = WorkoutType
     context_object_name = 'workouts_list'
 
     def get_queryset(self):
-        return Workout.objects.filter(user=self.request.user)
+        return WorkoutType.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -96,11 +96,14 @@ class CalendarView(LoginRequiredMixin, generic.ListView):
         current = self.request.user
         cal = Calendar(d.year, d.month, current)
         html_cal = cal.formatmonth(withyear=True)
+        MyWorkoutType = WorkoutType.objects.all()
 
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
+        context['workouttypes'] = MyWorkoutType
         return context
+
 
 def get_date(req_month):
     if req_month:
@@ -165,3 +168,6 @@ def workoutsearch(request):
         return render(request, 'log/search.html',{"searched":searched,"workouts":workouts})
     else:
         return render(request, 'log/search.html', {})
+
+
+

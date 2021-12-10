@@ -2,9 +2,13 @@
 {% block content %}
     <h1>search</h1>
 
+<form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'log:workout-search' %}">
+      {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searched" value="{{ searched }}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
 {% if searched %}
-<p>{{ searched }}</p>
-<br/>
 
 {% for workout in workouts %}
 <a href="{% url 'log:workout_edit' workout.id %}">{{ workout }}</a>
@@ -12,7 +16,7 @@
 {% endfor %}
 
 {% else %}
-<p>nope</p>
+<p>Zadejte hledaný výraz</p>
 {% endif %}
 
 {% endblock %}

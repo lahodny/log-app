@@ -47,7 +47,7 @@ class Workout(models.Model):
     @property
     def get_html_url(self):
         url = reverse('log:workout_edit', args=(self.id,))
-        return f'<a href="{url}"> {self.name} </a>'
+        return f'<a href="{url}" class="{self.workouttype}"> {self.name} </a>'
 
     def get_date(self,year, month, day):
         return f'<a href="../workout/new/{year}-{month}-{day}" class="add"> + </a>'
@@ -61,8 +61,14 @@ class Workout(models.Model):
 class WorkoutType(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="Name of the workout type",
                             help_text='Easy-paced run, Strength training,...')
+    icon = models.ImageField(upload_to='icons/', height_field=None, width_field=None, max_length=100, default='')
+
     class Meta:
         ordering = ["name"]
 
     def __str__(self):
         return self.name
+
+    def get_icon(self):
+        return self.icon
+
