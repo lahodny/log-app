@@ -4,13 +4,19 @@
 
 
 {% block content %}
+<div class="d-flex mt-5  justify-content-center">
+            <div class="p-5 mb-5 edit bg-white">
+
+
     <div class="container">
   <h1>Workout</h1>
 
   <form action="" method="post">
     {% csrf_token %}
       {{ form|crispy }}
-    <input type="submit" value="Submit">
+      <button class="btn btn-primary mt-3" class="primaryAction" type="submit">Uložit</button>
   </form>
       </div>
+            </div>
+        </div>
 {% endblock %}

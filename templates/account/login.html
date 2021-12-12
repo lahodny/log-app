@@ -3,6 +3,8 @@
 {% load i18n %}
 {% load account socialaccount %}
 
+  {% load crispy_forms_tags %}
+
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
@@ -35,12 +37,22 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ form|crispy }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+  <a class="button secondaryAction d-block" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  <button class="btn btn-primary mt-3" class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+    {% load socialaccount %}
+  {% providers_media_js %}
+  <div class="d-flex justify-content-around mt-3 ">
+<a href="{% provider_login_url "google" %}" class="btn btn-google btn-login text-uppercase fw-bold">
+                  <i class="fab fa-google me-2"></i>  Google
+                </a>
+ <a href="{% provider_login_url "facebook" %}" class="btn btn-facebook btn-login text-uppercase fw-bold">
+                  <i class="fab fa-facebook-f me-2"></i>  Facebook
+                </a>
+  </div>
 </form>
 
 {% endblock %}

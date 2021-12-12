@@ -4,26 +4,43 @@ Calendar
 {% endblock %}
 
 {% block content %}
+<div class="container-lg">
 
-<form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'log:workout-search' %}">
-      {% csrf_token %}
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searched">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+<form class="d-flex w-25" method="POST" action="{% url 'log:workout-search' %}">
+    {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched" value="{{ searched }}">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
 
-<div class="clearfix">
-	<a class="btn btn-info left" href="{% url 'log:calendar' %}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{% url 'log:calendar' %}?{{ next_month }}"> Next Month </a>
+    {% for workout in workouttypes %}
+    <button type="button" class="btn  filter my-2 {{workout.name}}" id="{{workout.name}}">{{workout.name}}</button>
+    {% endfor %}
+
+    <div class="d-flex justify-content-center month my-3">
+        <div class="order-1">
+            <a class="btn " href="{% url 'log:calendar' %}?{{ prev_month }}"> <i class="bi bi-chevron-left"></i></a>
+        </div>
+        <div class="order-3">
+	        <a class="btn " href="{% url 'log:calendar' %}?{{ next_month }}"> <i class="bi bi-chevron-right"></i> </a>
+        </div>
+
+        {{ calendar }}
+    </div>
 </div>
-
-<button type="button" class="btn btn-primary filter">Swimming</button>
-
-{{ calendar }}
 
 <script>
 
 $(document).ready(function(){
-  $(".calendar li a").filter(".Walk").parent().append(" <img src=\"{{ MEDIA_URL }}icons/walk.jpg\" class=\"img-responsive\" style=\"width: 100px;\" />\n");
+        $(".icons .Cycling").append(" <img src=\"{{ MEDIA_URL }}icons/bike.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+      $(".icons .Run").append(" <img src=\"{{ MEDIA_URL }}icons/run.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
+      $(".icons .Recovery").append(" <img src=\"{{ MEDIA_URL }}icons/heart.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+      $(".icons .Strength").append(" <img src=\"{{ MEDIA_URL }}icons/strength.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
+      $(".icons .Swimming").append(" <img src=\"{{ MEDIA_URL }}icons/swim.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+      $(".icons .GREAT").append("<i class=\"bi bi-emoji-laughing \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .GOOD").append("<i class=\"bi bi-emoji-smile \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .NORMAL").append("<i class=\"bi bi-emoji-neutral \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .BAD").append("<i class=\"bi bi-emoji-frown \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .TERRIBLE").append("<i class=\"bi bi-emoji-dizzy \" style='font-size: 1.5rem;'></i>\n");
 });
 
 </script>

@@ -29,10 +29,10 @@ class Workout(models.Model):
     time = models.TimeField(null=True,blank=True)
     workouttype = models.ForeignKey('WorkoutType',on_delete=models.CASCADE)
     name = models.CharField(max_length=1000, blank=True)
-    description = models.TextField(blank=True)
+    description = models.TextField(max_length=1000,blank=True)
     feeling = models.CharField(max_length=20,choices=FEELING,blank=True)
     effort = models.CharField(max_length=20, choices=EFFORT,blank=True)
-    notes = models.TextField(blank=True, verbose_name="post workout notes")
+    notes = models.TextField(max_length=1000,blank=True, verbose_name="post workout notes")
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
@@ -47,15 +47,21 @@ class Workout(models.Model):
     @property
     def get_html_url(self):
         url = reverse('log:workout_edit', args=(self.id,))
-        return f'<a href="{url}" class="{self.workouttype}"> {self.name} </a>'
+        return f'<a href="{url}"><div class="workout {self.workouttype}">' \
+               f'<div class="row">' \
+               f'<div class="col-xl-2 col-lg-3 text-center">' \
+               f'<div class="row icons mt-1">' \
+               f'<div class="col-4 ms-1  {self.workouttype}"></div>' \
+               f'<div class="col-4 ms-1  {self.feeling}"></div>' \
+               f'<div style="font-size: 1.1rem;" class="col-4 mt-n1 effort">{self.effort}</div>' \
+               f'</div></div><div class="col-xl-10 col-lg-9">' \
+               f'<div class="name">{self.name}</div>' \
+               f'<div class="description">{self.description}</div></div></div>' \
+               f'</div></a> '
 
     def get_date(self,year, month, day):
         return f'<a href="../workout/new/{year}-{month}-{day}" class="add"> + </a>'
 
-    @property
-    def mydelete(self):
-        url = reverse('log:workout-delete', args=(self.id,))
-        return f'<a href="{url}" > X </a>'
 
 
 class WorkoutType(models.Model):

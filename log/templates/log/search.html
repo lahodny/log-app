@@ -1,22 +1,68 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>search</h1>
 
-<form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'log:workout-search' %}">
-      {% csrf_token %}
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searched" value="{{ searched }}">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+<div class="container">
+    <h1>Search</h1>
+
+<form class="d-flex w-25" method="POST" action="{% url 'log:workout-search' %}">
+    {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched" value="{{ searched }}">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
 
 {% if searched %}
 
+    <div class="row mt-3 bg-white">
 {% for workout in workouts %}
-<a href="{% url 'log:workout_edit' workout.id %}">{{ workout }}</a>
 <br/>
+<div class="try col-3">
+    <a href="{% url 'log:workout_edit' workout.id %}">
+      <div class="workout {{workout.workouttype}}">
+        <div class="row">
+          <div class="col-xl-2 col-lg-3 text-center">
+            <div class="row icons mt-1">
+              <div class="col-4 ms-1  {{workout.workouttype}}">
+              </div>
+              <div class="col-4 ms-1  {{workout.feeling}}">
+              </div>
+              <div style="font-size: 1.1rem;" class="col-4 mt-n1 effort"> {{workout.effort}} </div>
+            </div>
+          </div>
+          <div class="col-xl-10 col-lg-9">
+            <div class="name">{{ workout.name }}</div>
+            <div class="description"> {{ workout.description }}</div>
+          </div>
+        </div>
+      </div>
+    </a>
+</div>
+
 {% endfor %}
+</div>
+
 
 {% else %}
 <p>Zadejte hledaný výraz</p>
 {% endif %}
+
+
+    </div>
+
+<script>
+
+$(document).ready(function(){
+      $(".icons .Cycling").append(" <img src=\"{{ MEDIA_URL }}icons/bike.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+      $(".icons .Run").append(" <img src=\"{{ MEDIA_URL }}icons/run.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
+      $(".icons .Recovery").append(" <img src=\"{{ MEDIA_URL }}icons/heart.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+      $(".icons .Strength").append(" <img src=\"{{ MEDIA_URL }}icons/strength.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
+      $(".icons .Swimming").append(" <img src=\"{{ MEDIA_URL }}icons/swim.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+      $(".icons .GREAT").append("<i class=\"bi bi-emoji-laughing \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .GOOD").append("<i class=\"bi bi-emoji-smile \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .NORMAL").append("<i class=\"bi bi-emoji-neutral \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .BAD").append("<i class=\"bi bi-emoji-frown \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .TERRIBLE").append("<i class=\"bi bi-emoji-dizzy \" style='font-size: 1.5rem;'></i>\n");
+});
+
+</script>
 
 {% endblock %}

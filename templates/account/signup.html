@@ -2,6 +2,8 @@
 
 {% load i18n %}
 
+  {% load crispy_forms_tags %}
+
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
@@ -11,15 +13,24 @@
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+
+  {{ form|crispy }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+  <button class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
   {% load socialaccount %}
   {% providers_media_js %}
-  <a href="{% provider_login_url "google" %}">google connect</a>
-  <a href="{% provider_login_url "facebook" %}">facebook connect</a>
+  <div class="d-flex justify-content-around mt-3">
+<a href="{% provider_login_url "google" %}" class="btn btn-google btn-login text-uppercase fw-bold">
+                  <i class="bi bi-google "></i>  Google
+                </a>
+ <a href="{% provider_login_url "facebook" %}" class="btn btn-facebook btn-login text-uppercase fw-bold">
+                  <i class="bi bi-facebook"></i> Facebook
+                </a>
+  </div>
+
 </form>
+
 
 {% endblock %}

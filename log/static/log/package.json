@@ -1,0 +1,17 @@
+{
+  "name": "log",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile:css": "node-sass -o ../staticfiles/css sass",
+    "compile:css:watch": "node-sass -o ../staticfiles/css sass --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "node-sass": "^7.0.0"
+  }
+}

@@ -1,90 +1,152 @@
 /* Common styles */
 body {
-  font-family: "ptsans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.btn {
-  outline: none;
-  color: black;
-  background-color: transparent;
-  box-shadow: 0 0 0 0;
-  margin-right: 3px;
-}
-
-.clearfix {
-  margin: 15px;
-}
-
-.form {
-  margin: auto;
-}
-
-.form input, .form select, .form textarea {
-  border-radius: 5px;
-  border: 1px solid #17a2b8;
-  outline: none;
-  background: none;
-  padding: 5px;
-  width: 100%;
+  font-family: 'Montserrat Alternates', sans-serif;
+  background: url('https://www.linkpicture.com/q/bg_3.png');
+  background-size: cover;
 }
 
 /* App styles */
-.title {
-  text-align: center;
-  margin: 10px;
-}
 
 .calendar {
-  width: 98%;
-  margin: auto;
-  font-size: 13px;
-}
-
-.calendar tr, .calendar td {
-  border: 1px solid black;
+  border-spacing: 4px;
+  border-collapse: separate;
+  table-layout: fixed;
 }
 
 .calendar th {
+  background-color: transparent;
   padding: 10px;
   text-align: center;
-  font-size: 18px;
+  font-size: 1rem;
+  border-bottom-width: 0px;
+  font-weight: 600;
 }
 
 .calendar td {
-  width: 200px;
-  height: 150px;
-  padding: 20px 0px 0px 5px;
+  background-color: white;
+  height: 8em;
+  padding: 0.5vh;
+  vertical-align: top;
+  border-bottom-width: 0px;
+  overflow: hidden;
+}
+
+.workout{
+  margin-bottom: 0.5vh;
+  height:6rem;
+  overflow:hidden;
+}
+
+.Swimming{
+  background-color: #51ACDB;
+}
+
+.Cycling{
+  background-color: #DB5C67;
+}
+
+.Run{
+  background-color: #DBAD72;
+}
+
+.Strength{
+  background-color: #DB8667;
+}
+
+.Recovery{
+  background-color: #7DDB93;
+}
+
+.calendar a, .try a {
+  text-decoration: none;
+  color: black;
+}
+
+.accounts{
+  width: 30rem;
+}
+
+.edit{
+  width: 50rem;
+}
+
+@media only screen and (max-width: 700px) {
+  .calendar {
+    table-layout: auto;
+  }
+
+}
+
+.card-img-left {
+  width: 45%;
+  /* Link to your background image using in the property below! */
+  background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+  background-size: cover;
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+.btn-google {
+  color: white !important;
+  background-color: #ea4335;
+}
+
+.btn-facebook {
+  color: white !important;
+  background-color: #3b5998;
 }
 
 .month {
-  font-size: 25px;
+  font-size: 2rem;
 }
 
-.date {
-  font-size: 16px;
+.bi-chevron-left {
+  -webkit-text-stroke: 2px ; /* background color */
 }
 
-ul {
-  height: 100%;
-  padding: 0px 5px 0px 20px;
+.bi-chevron-right {
+  -webkit-text-stroke: 2px ; /* background color */
 }
 
-a {
-  color: #17a2b8;
+@media only screen and (max-width: 992px) {
+  .effort {
+    display: none;
+  }
 }
 
-.today{
-  background-color: lightgrey;!important;
+.name{
+  font-weight: 500;
 }
 
-.add{
-  font-size: 20px;
+.effort{
+  margin-left: 0.6rem;
 }
+
+.navbar{
+  font-size: 1.1rem;
+}
+
+.active{
+  border-bottom: 1px solid #000;
+  padding-bottom: 3px;
+}
+
+@media only screen and (max-width: 576px) {
+   .active{
+    text-decoration: underline;
+     border-bottom: none;
+  }
+}
+
+.try {
+  background-color: transparent;
+  padding: 0.5vh;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+
