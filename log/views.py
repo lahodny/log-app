@@ -7,7 +7,7 @@ from django.views import generic
 from django.shortcuts import render
 
 from accounts import models
-from log.forms import WorkoutForm
+from log.forms import WorkoutForm, TypesForm
 from log.models import Workout, WorkoutType
 from django.contrib.auth.decorators import login_required
 from django import forms
@@ -18,6 +18,7 @@ import calendar
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 
 
 def index(request):
@@ -96,7 +97,7 @@ class CalendarView(LoginRequiredMixin, generic.ListView):
         current = self.request.user
         cal = Calendar(d.year, d.month, current)
         html_cal = cal.formatmonth(withyear=True)
-        MyWorkoutType = WorkoutType.objects.all()
+        MyWorkoutType = WorkoutType.objects.filter(Q(user=self.request.user) | Q(user='1'))
 
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
@@ -133,7 +134,7 @@ def workout(request, workout_id=None):
         instance = get_object_or_404(Workout, pk=workout_id)#neco jako filter
     else:
         instance = Workout()
-    form = WorkoutForm(request.POST or None, instance=instance)
+    form = WorkoutForm(request.POST or None, instance=instance, name=request.user)
     if request.method == 'POST':
         if form.is_valid():
             user = form.save(commit=False)
@@ -147,7 +148,7 @@ def workout(request, workout_id=None):
 
 
 def workoutdate(request, workout_date=None):
-    form = WorkoutForm(request.POST or None, initial={'date': workout_date})
+    form = WorkoutForm(request.POST or None, initial={'date': workout_date}, name=request.user)
     if request.method == 'POST':
         if form.is_valid():
             Workout.date = workout_date
@@ -158,7 +159,10 @@ def workoutdate(request, workout_date=None):
         else:
             form = WorkoutForm
 
+
     return render(request, 'log/workout_form.html', {'form': form})
+
+
 
 
 def workoutsearch(request):
@@ -173,3 +177,17 @@ def workoutsearch(request):
 
 
 
+def type(request):
+    instance = WorkoutType()
+    form = TypesForm(request.POST or None, instance = instance)
+    if request.method == 'POST':
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
+            return HttpResponseRedirect('/log/profile/')
+    else:
+        form = TypesForm
+
+
+    return render(request, 'log/profile.html', {'form': form})

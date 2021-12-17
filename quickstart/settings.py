@@ -89,6 +89,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'colorfield'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -241,3 +242,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'axareen44@gmail.com'
 EMAIL_HOST_PASSWORD = 'uumrbgbagidlmabf'
+
+

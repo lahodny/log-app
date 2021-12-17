@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.forms import ModelForm
+from colorfield.fields import ColorField
 
 
 class Workout(models.Model):
@@ -37,6 +38,7 @@ class Workout(models.Model):
 
     class Meta:
         ordering = ["date"]
+
     def __str__(self):
         return self.name
 
@@ -47,11 +49,11 @@ class Workout(models.Model):
     @property
     def get_html_url(self):
         url = reverse('log:workout_edit', args=(self.id,))
-        return f'<a href="{url}"><div class="workout {self.workouttype}">' \
+        return f'<a href="{url}"><div class="workout {self.workouttype}" style="background-color:{self.workouttype.color};">' \
                f'<div class="row">' \
                f'<div class="col-xl-2 col-lg-3 text-center">' \
                f'<div class="row icons mt-1">' \
-               f'<div class="col-4 ms-1  {self.workouttype}"></div>' \
+               f'<div class="col-4 ms-1 default {self.workouttype}"></div>' \
                f'<div class="col-4 ms-1  {self.feeling}"></div>' \
                f'<div style="font-size: 1.1rem;" class="col-4 mt-n1 effort">{self.effort}</div>' \
                f'</div></div><div class="col-xl-10 col-lg-9">' \
@@ -65,9 +67,18 @@ class Workout(models.Model):
 
 
 class WorkoutType(models.Model):
+    COLOR_CHOICES = [
+        ("#FFFFFF", "white"),
+        ("#000000", "black")
+    ]
+
     name = models.CharField(max_length=50, unique=True, verbose_name="Name of the workout type",
                             help_text='Easy-paced run, Strength training,...')
-    icon = models.ImageField(upload_to='icons/', height_field=None, width_field=None, max_length=100, default='')
+    icon = models.ImageField(upload_to='icons/', height_field=None, width_field=None, max_length=100, default='icons/star.png')
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    color = ColorField(default='#DB8667',samples=COLOR_CHOICES)
 
     class Meta:
         ordering = ["name"]
@@ -77,4 +88,7 @@ class WorkoutType(models.Model):
 
     def get_icon(self):
         return self.icon
+
+
+
 

@@ -3,9 +3,11 @@ from django.forms import ModelForm
 from django import forms
 
 from log import models
-from log.models import Workout
+from log.models import Workout, WorkoutType
 from calendar import HTMLCalendar
 from datetime import date
+from colorfield.widgets import ColorWidget
+from django.db.models import Q
 
 
 class WorkoutForm(ModelForm):
@@ -14,7 +16,19 @@ class WorkoutForm(ModelForm):
 		fields = ('date','time','workouttype','name','description','feeling','effort','notes')
 
 	def __init__(self, *args, **kwargs):
+		self.name = kwargs.pop('name')
 		super(WorkoutForm, self).__init__(*args, **kwargs)
+		#workouts = WorkoutType.objects.filter(Q(user=self.name) | Q(user='1'))
+		#workouttypes = [(i.id,i.name) for i in workouts]
+		#self.fields['workouttype'] = forms.ModelChoiceField(choices=workouttypes)
+		self.fields['workouttype'].queryset = WorkoutType.objects.filter(Q(user=self.name) | Q(user='1'))
+
+
+
+	workouttype = forms.ModelChoiceField(
+		queryset=None,
+		widget=forms.RadioSelect
+	)
 
 
 class Calendar(HTMLCalendar):
@@ -83,3 +97,17 @@ class Calendar(HTMLCalendar):
 		for week in self.monthdays2calendar(self.year, self.month):
 			cal += f'{self.formatweek(week, events)}\n'
 		return cal
+	
+	
+	
+class TypesForm(ModelForm):
+	class Meta:
+		model = WorkoutType
+		fields = ('name','color')
+		widgets = {
+			'color': ColorWidget,
+		}
+
+	def __init__(self, *args, **kwargs):
+		super(TypesForm, self).__init__(*args, **kwargs)
+

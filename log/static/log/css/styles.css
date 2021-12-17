@@ -37,25 +37,6 @@ body {
   overflow:hidden;
 }
 
-.Swimming{
-  background-color: #51ACDB;
-}
-
-.Cycling{
-  background-color: #DB5C67;
-}
-
-.Run{
-  background-color: #DBAD72;
-}
-
-.Strength{
-  background-color: #DB8667;
-}
-
-.Recovery{
-  background-color: #7DDB93;
-}
 
 .calendar a, .try a {
   text-decoration: none;

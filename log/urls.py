@@ -13,4 +13,5 @@ urlpatterns = [
     path('workout/<workout_id>/edit/', views.workout, name='workout_edit'),
     path('workout/new/<workout_date>/', views.workoutdate, name='workout_date'),
     path('workouts/search/', views.workoutsearch, name='workout-search'),
+    path('profile/', views.type, name='type'),
 ]

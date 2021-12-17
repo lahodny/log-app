@@ -13,7 +13,7 @@ Calendar
       </form>
 
     {% for workout in workouttypes %}
-    <button type="button" class="btn  filter my-2 {{workout.name}}" id="{{workout.name}}">{{workout.name}}</button>
+    <button type="button" class="btn  filter my-2 {{workout.name}}" id="{{workout.name}}" style="background-color: {{workout.color}};" >{{workout.name}}</button>
     {% endfor %}
 
     <div class="d-flex justify-content-center month my-3">
@@ -31,16 +31,28 @@ Calendar
 <script>
 
 $(document).ready(function(){
-        $(".icons .Cycling").append(" <img src=\"{{ MEDIA_URL }}icons/bike.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
-      $(".icons .Run").append(" <img src=\"{{ MEDIA_URL }}icons/run.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
-      $(".icons .Recovery").append(" <img src=\"{{ MEDIA_URL }}icons/heart.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
-      $(".icons .Strength").append(" <img src=\"{{ MEDIA_URL }}icons/strength.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
-      $(".icons .Swimming").append(" <img src=\"{{ MEDIA_URL }}icons/swim.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
-      $(".icons .GREAT").append("<i class=\"bi bi-emoji-laughing \" style='font-size: 1.5rem;'></i>\n");
-      $(".icons .GOOD").append("<i class=\"bi bi-emoji-smile \" style='font-size: 1.5rem;'></i>\n");
-      $(".icons .NORMAL").append("<i class=\"bi bi-emoji-neutral \" style='font-size: 1.5rem;'></i>\n");
-      $(".icons .BAD").append("<i class=\"bi bi-emoji-frown \" style='font-size: 1.5rem;'></i>\n");
-      $(".icons .TERRIBLE").append("<i class=\"bi bi-emoji-dizzy \" style='font-size: 1.5rem;'></i>\n");
+    if ($(".workout").hasClass("Cycling")) {
+         $(".icons .Cycling").append(" <img src=\"{{ MEDIA_URL }}icons/bike.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+         $('.icons .Cycling').removeClass('default');
+    }
+    if ($(".workout").hasClass("Run")) {
+         $(".icons .Run").append(" <img src=\"{{ MEDIA_URL }}icons/run.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
+         $('.icons .Run').removeClass('default');
+    }
+    if ($(".workout").hasClass(".Strength")) {
+          $(".icons .Strength").append(" <img src=\"{{ MEDIA_URL }}icons/strength.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
+         $('.icons .Strength').removeClass('default');
+    }
+    if ($(".workout").hasClass("Swimming")) {
+         $(".icons .Swimming").append(" <img src=\"{{ MEDIA_URL }}icons/swim.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+         $('.icons .Swimming').removeClass('default');
+    }
+    if ($(".workout").hasClass("Recovery")) {
+        $(".icons .Recovery").append(" <img src=\"{{ MEDIA_URL }}icons/heart.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
+         $('.icons .Recovery').removeClass('default');
+    }
+
+    $(".icons .default").append(" <img src=\"{{ MEDIA_URL }}icons/star.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
 });
 
 </script>
