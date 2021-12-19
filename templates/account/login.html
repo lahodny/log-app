@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<h1>{% trans "Sign In" %}</h1>
+<h1>{% trans "Login" %}</h1>
 
 {% get_providers as socialaccount_providers %}
 
@@ -42,15 +42,15 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
   <a class="button secondaryAction d-block" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="btn btn-primary mt-3" class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+  <button class="btn btn-primary mt-3" class="primaryAction" type="submit">{% trans "Login" %}</button>
     {% load socialaccount %}
   {% providers_media_js %}
   <div class="d-flex justify-content-around mt-3 ">
 <a href="{% provider_login_url "google" %}" class="btn btn-google btn-login text-uppercase fw-bold">
-                  <i class="fab fa-google me-2"></i>  Google
+                  <i class="bi bi-google"></i>  Google
                 </a>
  <a href="{% provider_login_url "facebook" %}" class="btn btn-facebook btn-login text-uppercase fw-bold">
-                  <i class="fab fa-facebook-f me-2"></i>  Facebook
+                  <i class="bi bi-facebook"></i>  Facebook
                 </a>
   </div>
 </form>

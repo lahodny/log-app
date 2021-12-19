@@ -168,7 +168,7 @@ def workoutdate(request, workout_date=None):
 def workoutsearch(request):
     if request.method == 'POST':
         searched = request.POST['searched']
-        workouts = Workout.objects.filter(name__contains=searched)
+        workouts = Workout.objects.filter(Q(name__contains=searched) & Q(user=request.user))
 
         return render(request, 'log/search.html',{"searched":searched,"workouts":workouts})
     else:

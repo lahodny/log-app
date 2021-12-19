@@ -5,7 +5,7 @@
 
    {% if user.is_authenticated %}
      <li>User: {{ user.email }}  {{ user.get_username }}</li>
-     <li><a href="{% url 'account_logout'%}?next={{request.path}}">Logout</a></li>
+     <li><a href="{% url 'account_logout'%}?next={{request.path}}">Sign out</a></li>
    {% else %}
        <li>Nejste prihlaseni</li>
      <li><a href="{% url 'account_login'%}?next={{request.path}}">Login</a></li>

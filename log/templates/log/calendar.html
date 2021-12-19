@@ -6,10 +6,15 @@ Calendar
 {% block content %}
 <div class="container-lg">
 
-<form class="d-flex w-25" method="POST" action="{% url 'log:workout-search' %}">
+<form class="d-flex" method="POST" action="{% url 'log:workout-search' %}">
     {% csrf_token %}
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched" value="{{ searched }}">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+    <div>
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searched" value="{{ searched }}">
+    </div>
+<div>
+    <button class="btn btn-outline-primary ms-1" type="submit"><i class="bi bi-search"></i></button>
+</div>
+
       </form>
 
     {% for workout in workouttypes %}

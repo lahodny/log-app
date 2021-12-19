@@ -8,17 +8,33 @@
 
 <div class="d-flex mt-5  justify-content-center">
             <div class="p-5 mb-5 edit bg-white">
+                <div class="container">
+                    <div class="d-flex flex-sm-row flex-column justify-content-between align-items-start">
+                        <h1>Profile settings <i class="bi bi-gear"></i></h1>
+                        <a href="{% url 'account_logout'%}" class="btn btn-primary mb-2" role="button">Sign out</a>
+                    </div>
+
+                    <ul>
+                    <li><a href="{% url 'account_email'%}">Change email</a></li>
+                <li><a href="{% url 'account_change_password'%}">Change password</a></li>
+                <li><a href="{% url 'account_reset_password'%}">Forgotten password</a></li>
+                    </ul>
+
+    </div>
 
 
+<hr/>
     <div class="container">
-  <h1>Workout Type</h1>
+  <h1>Add a Workout Type</h1>
     {{ form.media }}
   <form action="" method="post">
     {% csrf_token %}
       {{ form|crispy }}
-      <button class="btn btn-primary mt-3" class="primaryAction" type="submit">Uložit</button>
+      <button class="btn btn-primary mt-3" class="primaryAction" type="submit">Save</button>
   </form>
       </div>
             </div>
         </div>
+
+
 {% endblock %}

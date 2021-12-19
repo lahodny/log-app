@@ -48,7 +48,7 @@ class Calendar(HTMLCalendar):
 
 		if day != 0:
 			if date.today() == date(self.year, self.month, day):
-				return f"<td class='bg-light'><div class='d-flex justify-content-between'><span class='date'>{day}</span>{Workout.get_date(self,self.year,self.month,day)}</div>{d}</td>"
+				return f"<td><div class='d-flex justify-content-between'><span class='date text-primary'><strong>{day}</strong></span>{Workout.get_date(self,self.year,self.month,day)}</div>{d}</td>"
 			return f"<td><div class='d-flex justify-content-between'><span class='date'>{day}</span>{Workout.get_date(self,self.year,self.month,day)}</div>{d}</td>"
 		return '<td class="bg-light"></td>'
 
@@ -64,36 +64,11 @@ class Calendar(HTMLCalendar):
 	def formatmonth(self, withyear=True):
 		events = Workout.objects.filter(date__year=self.year, date__month=self.month,user=self.current)
 
-		if self.month == 1 :
-			cal = f'<div class="order-2">Leden {self.year}</div></div>'
-		elif self.month == 2 :
-			cal = f'<div class="order-2">Únor {self.year}</div></div>'
-		elif self.month == 3 :
-			cal = f'<div class="order-2">Březen {self.year}</div></div>'
-		elif self.month == 4 :
-			cal = f'<div class="order-2">Duben {self.year}</div></div>'
-		elif self.month == 5 :
-			cal = f'<div class="order-2">Květen {self.year}</div></div>'
-		elif self.month == 6 :
-			cal = f'<div class="order-2">Červen {self.year}</div></div>'
-		elif self.month == 7 :
-			cal = f'<div class="order-2">Červenec {self.year}</div></div>'
-		elif self.month == 8 :
-			cal = f'<div class="order-2">Srpen {self.year}</div></div>'
-		elif self.month == 9 :
-			cal = f'<div class="order-2">Září  {self.year}</div></div>'
-		elif self.month == 10:
-			cal = f'<div class="order-2">Říjen  {self.year}</div></div>'
-		elif self.month == 11:
-			cal = f'<div class="order-2">Listopad   {self.year}</div></div>'
-		elif self.month == 12:
-			cal = f'<div class="order-2">Prosinec  {self.year}</div></div>'
-		else :
-			cal = f'<div  class="order-2">  {self.year}</div></div>'
 
+		cal = f'<div  class="order-2">{self.formatmonthname(self.year, self.month, withyear=withyear)}</div></div>\n'
 		cal += f'<div class="overflow-auto">\n'
 		cal += f'<table class="table calendar">\n'
-		cal += f'<tr><th class="mon">Pondělí</th><th class="tue">Úterý</th><th class="wed">Středa</th><th class="thu">Čtvrtek</th><th class="fri">Pátek</th><th class="sat">Sobota</th><th class="sun">Neděle</th></tr>'
+		cal += f'{self.formatweekheader()}\n'
 		for week in self.monthdays2calendar(self.year, self.month):
 			cal += f'{self.formatweek(week, events)}\n'
 		return cal
