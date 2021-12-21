@@ -8,7 +8,8 @@ from .models import *
 
 admin.site.register(Workout)
 admin.site.register(WorkoutType)
-
+admin.site.register(Discipline)
+admin.site.register(Performances)
 
 
 #@admin.register(Workout)

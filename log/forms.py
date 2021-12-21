@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django import forms
 
 from log import models
-from log.models import Workout, WorkoutType
+from log.models import Workout, WorkoutType, Discipline, Performances
 from calendar import HTMLCalendar
 from datetime import date
 from colorfield.widgets import ColorWidget
@@ -85,4 +85,17 @@ class TypesForm(ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(TypesForm, self).__init__(*args, **kwargs)
+
+
+
+class PerformancesForm(forms.ModelForm):
+    class Meta:
+        model = Performances
+        fields = '__all__'
+
+
+class DisciplineForm(forms.ModelForm):
+    class Meta:
+        model = Discipline
+        fields = '__all__'
 

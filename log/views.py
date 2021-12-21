@@ -4,16 +4,16 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from accounts import models
 from log.forms import WorkoutForm, TypesForm
-from log.models import Workout, WorkoutType
+from log.models import Workout, WorkoutType, Discipline, Performances
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.utils.safestring import mark_safe
 from datetime import datetime, timedelta, date
-from .forms import Calendar
+from .forms import Calendar, PerformancesForm, DisciplineForm
 import calendar
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
@@ -191,3 +191,31 @@ def type(request):
 
 
     return render(request, 'log/profile.html', {'form': form})
+
+
+def performances(request):
+    disciplines = Discipline.objects.all()
+
+    if request.method == 'POST' and 'btnform1' in request.POST:
+        form = PerformancesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/log/performances/')
+    else:
+        form = PerformancesForm()
+
+    if request.method == 'POST' and 'btnform2' in request.POST:
+        form = DisciplineForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/log/performances/')
+    else:
+        form2 = DisciplineForm()
+
+
+    context = {
+        'disciplines' :   disciplines,
+        "form": form,
+        "form2": form2
+    }
+    return render(request, 'log/performances.html', context)

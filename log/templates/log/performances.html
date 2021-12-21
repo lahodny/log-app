@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container-lg mt-3">
+    <div class="row">
+            <div class="col-sm-6">
+                    <h4>Add Performance</h4>
+                    <hr>
+
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        {{ form|crispy }}
+
+                        <input class="btn btn-primary mt-2" type="submit" value="Add Data"  name="btnform1">
+
+                    </form>
+
+            </div>
+
+
+
+            <div class="col-sm-6 mt-3 mt-sm-0">
+                    <h4>Add Discipline</h4>
+                    <hr>
+
+                    <form action=""  method="POST">
+                        {% csrf_token %}
+
+                        {{ form2|crispy }}
+
+                        <input class="btn btn-primary mt-2" type="submit" value="Add Data" name="btnform2">
+
+                    </form>
+
+            </div>
+    </div>
+
+        {% for performance in disciplines %}
+
+
+            <div class="container mt-4">
+                <h4>{{ performance.name }}</h4>
+                <canvas class="bg-white" id="{{ performance.name }}"></canvas>
+                    <script>
+
+                    var ctx = document.getElementById('{{ performance.name }}').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: [{% for x in performance.performances_set.all  %}  '{{ x.performedat }}',  {% endfor %}],
+                            datasets: [{
+                                label: '{{ performance.name }}',
+                                data: [{% for x in performance.performances_set.all  %}  '{{ x.performance }}',  {% endfor %}],
+                                backgroundColor: [
+                                    'rgba(199, 62, 29, 1)',
+                                    'rgba(54, 162, 235, 0.8)',
+                                    'rgba(255, 206, 86, 0.8)',
+                                    'rgba(75, 192, 192, 0.8)',
+                                    'rgba(153, 102, 255, 0.8)',
+                                    'rgba(255, 159, 64, 0.8)',
+                                    'rgba(240, 120, 50, 0.8)',
+                                ],
+                                borderColor: [
+                                    'rgba(199, 62, 29, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)',
+                                    'rgba(240, 120, 50, 1)',
+
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    display: true,
+                                    labelString: 'name'
+                                },
+                            }
+                        }
+                    });
+                    </script>
+            </div>
+    </div>
+
+{% endfor %}
+
+
+{% endblock %}
