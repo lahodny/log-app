@@ -36,6 +36,13 @@ Calendar
 <script>
 
 $(document).ready(function(){
+    $(".icons .GREAT").append("<i class=\"bi bi-emoji-laughing \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .GOOD").append("<i class=\"bi bi-emoji-smile \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .NORMAL").append("<i class=\"bi bi-emoji-neutral \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .POOR").append("<i class=\"bi bi-emoji-frown \" style='font-size: 1.5rem;'></i>\n");
+      $(".icons .TERRIBLE").append("<i class=\"bi bi-emoji-dizzy \" style='font-size: 1.5rem;'></i>\n");
+
+
     if ($(".workout").hasClass("Cycling")) {
          $(".icons .Cycling").append(" <img src=\"{{ MEDIA_URL }}icons/bike.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
          $('.icons .Cycling').removeClass('default');
@@ -44,9 +51,9 @@ $(document).ready(function(){
          $(".icons .Run").append(" <img src=\"{{ MEDIA_URL }}icons/run.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
          $('.icons .Run').removeClass('default');
     }
-    if ($(".workout").hasClass(".Strength")) {
-          $(".icons .Strength").append(" <img src=\"{{ MEDIA_URL }}icons/strength.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
-         $('.icons .Strength').removeClass('default');
+    if ($(".workout").hasClass("Strength-Training")) {
+          $(".icons .Strength-Training").append(" <img src=\"{{ MEDIA_URL }}icons/strength.png\" class=\"\" style=\"width: 1.2rem;\" />\n");
+         $('.icons .Strength-Training').removeClass('default');
     }
     if ($(".workout").hasClass("Swimming")) {
          $(".icons .Swimming").append(" <img src=\"{{ MEDIA_URL }}icons/swim.png\" class=\"img-responsive\" style=\"width: 1.5rem;\" />\n");
@@ -61,4 +68,6 @@ $(document).ready(function(){
 });
 
 </script>
+
+
 {% endblock %}

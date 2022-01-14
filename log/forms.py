@@ -18,12 +18,7 @@ class WorkoutForm(ModelForm):
 	def __init__(self, *args, **kwargs):
 		self.name = kwargs.pop('name')
 		super(WorkoutForm, self).__init__(*args, **kwargs)
-		#workouts = WorkoutType.objects.filter(Q(user=self.name) | Q(user='1'))
-		#workouttypes = [(i.id,i.name) for i in workouts]
-		#self.fields['workouttype'] = forms.ModelChoiceField(choices=workouttypes)
 		self.fields['workouttype'].queryset = WorkoutType.objects.filter(Q(user=self.name) | Q(user='1'))
-
-
 
 	workouttype = forms.ModelChoiceField(
 		queryset=None,
@@ -88,14 +83,24 @@ class TypesForm(ModelForm):
 
 
 
-class PerformancesForm(forms.ModelForm):
-    class Meta:
-        model = Performances
-        fields = '__all__'
+class PerformancesForm(ModelForm):
+	class Meta:
+		model = Performances
+		fields = ('performance','performedat','discipline_id')
+
+	def __init__(self, *args, **kwargs):
+		self.name = kwargs.pop('name')
+		super(PerformancesForm, self).__init__(*args, **kwargs)
+		self.fields['discipline_id'].queryset = Discipline.objects.filter(Q(user=self.name) | Q(user='1'))
+
+	discipline_id = forms.ModelChoiceField(
+		queryset=None,
+		widget=forms.RadioSelect
+	)
 
 
 class DisciplineForm(forms.ModelForm):
-    class Meta:
-        model = Discipline
-        fields = '__all__'
+	class Meta:
+		model = Discipline
+		fields = ('name','unit')
 

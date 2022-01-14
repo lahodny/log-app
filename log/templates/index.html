@@ -1,15 +1,133 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>index</h1>
-  <ul class="sidebar-nav">
 
-   {% if user.is_authenticated %}
-     <li>User: {{ user.email }}  {{ user.get_username }}</li>
-     <li><a href="{% url 'account_logout'%}?next={{request.path}}">Sign out</a></li>
-   {% else %}
-       <li>Nejste prihlaseni</li>
-     <li><a href="{% url 'account_login'%}?next={{request.path}}">Login</a></li>
-       <li><a href="{% url 'account_signup'%}?next={{request.path}}">Signup</a></li>
-   {% endif %}
-  </ul>
+
+<script>
+  AOS.init();
+</script>
+
+
+
+
+<div data-aos="fade-up" data-aos-duration="1000" class="container-lg my-3 my-md-5 pt-md-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <h1 class="display-4 mb-5">Track your workouts and personal bests all in one place.</h1>
+            <h4 class="mb-5 mb-lg-0">Simple and intuitive tracking platform helping you achieve your goals faster thanks to clear data visualisation without any distractions.</h4>
+        </div>
+        <div data-tilt data-tilt-reverse="true" data-tilt-scale="1.1"   class="col-lg-6 d-flex justify-content-center align-items-center">
+            <img src="https://www.linkpicture.com/q/iphones-floating-both-orientations-cropped.png" class="img-fluid m-lg-n4   "  alt="...">
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-light mt-0 mt-lg-5">
+    <div class="container-lg my-5">
+        <div class="text-center mb-5">
+                <h1>Tracking app is a must</h1>
+                <h4>Every professional athlete tracks their training</h4>
+            </div>
+        <div class="container px-4">
+            <div class="row gy-3 mt-5">
+                <div class="col-lg-4">
+                    <div class="p-3 border border-primary bg-light h-100">
+                        <h4><i class="fas fa-eye me-2 text-primary"></i> Get a big picture view</h4>
+                        <p>If your training is important to you it’s critical to not get lost in the daily ups and downs and see the bigger picture. Having your workout history in hand will show you the general trajectory of your training and help but the occasional crappy workout in perspective.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="p-3 border border-primary bg-light h-100">
+                        <h4><i class="bi bi-lightning-fill me-2 text-primary"></i>Insane motivation</h4>
+                        <p>Is there anything more motivating than seeing how far you have come? With an exercise log you can flip through the pages of your path to improvement. Seeing how far you’ve come is white-hot fuel for pushing you to get to where you want to go.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="p-3 border border-primary bg-light h-100">
+                        <h4><i class="fas fa-list-ul me-3 text-primary"></i>Goal setting</h4>
+                        <p>The key in setting successful goals is being realistic about what we are capable of given what we have. Nowhere can we learn more about how fast we can expect progress than by pouring over your exercise log.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="bg-pattern-color text-white pt-3">
+    <div class="container-lg my-5">
+        <div class="text-center mb-5 pb-lg-3">
+                <h1>A new, exciting way to keep an eye on training </h1>
+        </div>
+        <div class="row my-5 py-lg-3" style="overflow-x: hidden">
+            <div data-aos="fade-right" data-aos-duration="1500" class="col-sm-7 d-flex align-items-center">
+                <div>
+                    <h3 class="mb-4">Calendar</h3>
+                    <p>Spot trends and patterns in your training easily with our calendar. Workout types have different colors to keep things organized. You will notice correlations that have remained unseen. This will help you prevent injury and learn from your mistakes.</p>
+                    <p>You can create your own workout types as well!</p>
+                </div>
+            </div>
+            <div data-aos="fade-left" data-aos-duration="1500" class="col-sm-5 d-flex justify-content-center align-items-center">
+                <img src="https://www.linkpicture.com/q/Frame-5.png" class="img-fluid" alt="...">
+            </div>
+        </div>
+        <div class="row my-5" style="overflow-x: hidden">
+            <div data-aos="fade-right" data-aos-duration="1500" class="col-sm-5 order-last order-sm-first d-flex justify-content-center align-items-center">
+                <img src="https://www.linkpicture.com/q/Frame-4_3.png" class="img-fluid" alt="...">
+            </div>
+            <div data-aos="fade-left" data-aos-duration="1500" class="col-sm-7 order-first order-sm-last d-flex align-items-center">
+                <div>
+                    <h3 class="mb-4">Personal bests</h3>
+                    <p>Graphs are a beatiful way to visualize data. They show your records in a very clear way. Get a motivation drive by looking at your progress.</p>
+                    <p>Just create a discipline you want to measure and add your performances.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container my-5">
+            <div class="row gy-3 text-center text-primary py-3 fs-2">
+                <div data-aos="zoom-in" data-aos-duration="1500" class="col-6 col-lg-3">
+                    <div class="py-5 bg-white">
+                        <span><i class="far fa-handshake"></i></span>
+                        <h5>Forever Free</h5>
+                    </div>
+                </div>
+                <div data-aos="zoom-in" data-aos-duration="1500" class="col-6 col-lg-3">
+                    <div class="py-5 bg-white">
+                        <span><i class="fas fa-chalkboard-teacher"></i></span>
+                        <h5>Easy and Intuitive</h5>
+                    </div>
+                </div>
+                <div data-aos="zoom-in" data-aos-duration="1500" class="col-6 col-lg-3">
+                    <div class="py-5 bg-white">
+                        <span><i class="fas fa-cloud-upload-alt"></i></span>
+                        <h5>Online Data Backup</h5>
+                    </div>
+                </div>
+                <div data-aos="zoom-in" data-aos-duration="1500" class="col-6 col-lg-3">
+                    <div class="py-5 bg-white">
+                        <span><i class="fas fa-store-slash"></i></span>
+                        <h5>No ads</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="bg-pattern pt-3">
+    <div data-aos="fade-up" data-aos-duration="1500" class="container-lg bg-white my-5 pt-5 pb-2">
+         <div class="text-center mb-5 py-5">
+             <h1>Start your journey!</h1>
+             <h4 class="mb-4">Push yourself to another level with our app</h4>
+             <span><a href="{% url 'account_signup'%}?next={{request.path}}" class="btn btn-primary" role="button"><i class="bi bi-person-plus-fill me-2"></i>Sign up</a></span>
+        </div>
+    </div>
+</div>
 {% endblock %}

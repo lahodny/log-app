@@ -117,7 +117,7 @@ body {
   padding-bottom: 3px;
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 768px) {
    .active{
     text-decoration: underline;
      border-bottom: none;
@@ -132,3 +132,12 @@ body {
 }
 
 
+.bg-pattern-color{
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),url('https://www.linkpicture.com/q/bg-brown.png');
+  background-size: cover;
+}
+
+.bg-pattern{
+  background: url('https://www.linkpicture.com/q/bg_3.png');
+  background-size: cover;
+}

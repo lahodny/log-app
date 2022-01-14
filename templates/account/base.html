@@ -1,6 +1,6 @@
 {% load cms_tags static sekizai_tags menu_tags %}
 <!doctype html>
-<html>
+<html class="h-100">
     <head>
         <meta charset="utf-8">
         <title>{% block title %}This is my new project home page{% endblock title %}</title>
@@ -16,28 +16,28 @@
         <link rel="stylesheet" href="{% static 'staticfiles/css/main.css' %}">
         <link rel="stylesheet" href="{% static 'log/css/styles.css' %}">
     </head>
-    <body>
+    <body class="d-flex flex-column h-100">
 
 
         {% cms_toolbar %}
-        <nav class="navbar navbar-expand-sm navbar-light mx-2">
+        <nav class="navbar navbar-expand-md navbar-light mx-2">
           <div class="container-fluid">
             <a class="navbar-brand" href="/log/">
-                  <img src="https://www.linkpicture.com/q/Frame-2transparent.svg" width="30" height="30" class="d-inline-block" alt="">
+                  <img src="https://www.linkpicture.com/q/Appollog-1-1.png" width="" height="35" class="d-inline-block" alt="">
               </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {% with request.resolver_match.url_name as url_name %}
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-black">
+              <ul class="navbar-nav me-auto  mb-lg-0 text-black">
                         <li class="nav-item ">
                             <a class="nav-link {% if url_name == 'index' %}active{% endif %} text-black" href="/log/">Home </a>
                           </li>
                           <li class="nav-item ">
                             <a class="nav-link {% if url_name == 'calendar' %}active{% endif %} text-black" href="/log/calendar/">Calendar</a>
                           </li>
-                        <li class="nav-item ">
+                         <li class="nav-item ">
                             <a class="nav-link {% if url_name == 'performances' %}active{% endif %} text-black" href="/log/performances/">Performances</a>
                           </li>
               </ul>
@@ -47,12 +47,13 @@
                     {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link text-black" href="{% url 'log:type'%}"><i class="bi bi-person-circle"></i> Logged in as  {{ user.get_username }}</a></li>
                             {% else %}
-                             <li class="nav-item mb-1 mt-sm-1 mt-0"><a href="{% url 'account_login'%}?next={{request.path}}"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>
-                             <li class="nav-item ms-sm-3"><a href="{% url 'account_signup'%}?next={{request.path}}" class="btn btn-primary" role="button"><i class="bi bi-person-plus-fill me-2"></i>Sign up</a></li>
+                             <li class="nav-item mb-1 mt-md-1 mt-0"><a href="{% url 'account_login'%}?next={{request.path}}"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>
+                             <li class="nav-item ms-md-3"><a href="{% url 'account_signup'%}?next={{request.path}}" class="btn btn-primary" role="button"><i class="bi bi-person-plus-fill me-2"></i>Sign up</a></li>
                     {% endif %}
               </ul>
 
             </div>
+          </div>
         </nav>
 
 
@@ -61,6 +62,14 @@
             {% block content %}{% endblock content %}
             </div>
         </div>
+
+        {% with request.resolver_match.url_name as url_name %}
+        <footer class="footer mt-auto py-3 bg-light {% if url_name == 'calendar' %}d-none{% endif %}">
+            <div class="container text-center">
+                <span class="text-muted bg-transparent">© 2022 Aleš Lahodný, SŠPU Opava</span>
+            </div>
+        </footer>
+    {% endwith %}
 
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

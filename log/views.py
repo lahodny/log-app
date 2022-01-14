@@ -7,13 +7,13 @@ from django.views import generic
 from django.shortcuts import render, redirect
 
 from accounts import models
-from log.forms import WorkoutForm, TypesForm
+from log.forms import WorkoutForm, TypesForm, PerformancesForm, DisciplineForm
 from log.models import Workout, WorkoutType, Discipline, Performances
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.utils.safestring import mark_safe
 from datetime import datetime, timedelta, date
-from .forms import Calendar, PerformancesForm, DisciplineForm
+from .forms import Calendar
 import calendar
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
@@ -194,20 +194,24 @@ def type(request):
 
 
 def performances(request):
-    disciplines = Discipline.objects.all()
+    disciplines = Discipline.objects.filter(user=request.user)
 
     if request.method == 'POST' and 'btnform1' in request.POST:
-        form = PerformancesForm(request.POST)
+        form = PerformancesForm(request.POST or None, name=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
             return redirect('/log/performances/')
     else:
-        form = PerformancesForm()
+        form = PerformancesForm(request.POST or None, name=request.user)
 
     if request.method == 'POST' and 'btnform2' in request.POST:
         form = DisciplineForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
             return redirect('/log/performances/')
     else:
         form2 = DisciplineForm()
